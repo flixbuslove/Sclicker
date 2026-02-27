@@ -1,8 +1,5 @@
 import tkinter as tk
 
-# Tkinter library required
-# install python :)
-
 okno = tk.Tk()
 okno.title("SClicker")
 okno.geometry("300x300")
@@ -16,10 +13,56 @@ dodawane_klik = 1
 iloscklikniec_label = tk.Label(okno, text=ilosc_klikniec)
 iloscklikniec_label.pack()
 
+
+def ending(ktory):
+    global iloscklikniec_label
+    global kliknij
+    global ulepszbutton
+    if ktory == "za duzo":
+        kliknij.pack_forget()
+        ulepszbutton.pack_forget()
+        iloscklikniec_label.pack_forget()
+        ending_zaduzo = tk.Label(okno,text="ENDING \n ZA DUŻO \n nie musisz tyle klikać \n Dzięki za gre :) \n oceń na githubie pls", font="Arial" "Bold", )
+        ending_zaduzo.pack()
+    if ktory == "WOW":
+        kliknij.pack_forget()
+        ulepszbutton.pack_forget()
+        iloscklikniec_label.pack_forget()
+        ending_wow = tk.Label(okno,text="ENDING \n WOW \n przeszedłeś całą GRE! \n gratulacje czy coś \n Dzięki za gre :) \n oceń na githubie pls", font="Arial" "Bold", )
+        ending_wow.pack()
+    if ktory == "1 poziom serio":
+        kliknij.pack_forget()
+        ulepszbutton.pack_forget()
+        iloscklikniec_label.pack_forget()
+        ending_1poziomserio = tk.Label(okno,text="ENDING \n 1 poziom SERIO? \n przeszedłeś całą GRE! \n gratulacje czy coś \n Dzięki za gre :) \n oceń na githubie pls", font="Arial" "Bold", )
+        ending_1poziomserio.pack()
+    
+
+
+
+
 def dodajklikniecie():
     global ilosc_klikniec
-    ilosc_klikniec += dodawane_klik
-    iloscklikniec_label.config(text=ilosc_klikniec)
+    if ilosc_klikniec >= 99999:
+        ending("za duzo")
+
+    if poziom == 6:
+        if ilosc_klikniec >= 0:
+            ending("WOW")
+        else:
+            ilosc_klikniec += dodawane_klik
+            iloscklikniec_label.config(text=ilosc_klikniec)
+    if poziom == 0:
+        if ilosc_klikniec >= 150:
+            ending("1 poziom serio")
+        else:
+            ilosc_klikniec += dodawane_klik
+            iloscklikniec_label.config(text=ilosc_klikniec)
+
+    else:    
+
+        ilosc_klikniec += dodawane_klik
+        iloscklikniec_label.config(text=ilosc_klikniec)
 
 def ref():
     iloscklikniec_label.config(text=ilosc_klikniec)
@@ -38,7 +81,7 @@ def niezadlugo():
     global kliknij
     niezadlugo_okno = tk.Tk()
     niezadlugo_okno.title("nie za długi klikasz????")
-    label = tk.Label(text="nie za długo klikasz???? \n NA ZNIECHETE USUNIEMY CI 5000 KLIKNIĘĆ :)")
+    label = tk.Label(niezadlugo_okno,text="nie za długo klikasz???? \n NA ZNIECHETE USUNIEMY CI 5000 KLIKNIĘĆ :)")
     label.pack()
     ilosc_klikniec -= 5000
     kliknij.config(command=dodajklikniecie)
@@ -62,6 +105,7 @@ def reklama():
 
 
 def ulepsz():
+    global sprawdz_ending
     global kliknij
     global ulepszbutton
     global ilosc_klikniec
@@ -122,9 +166,10 @@ def ulepsz():
             poziom += 1
             print(poziom)
     elif poziom == 6:
+        
         if ilosc_klikniec >= 20000:
             dodawane_klik = 1
-            ilosc_klikniec = -1000000
+            
             ref()
         
 
