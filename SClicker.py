@@ -1,4 +1,9 @@
 import tkinter as tk
+import random
+
+ # you must to have tkinter and python P
+
+yesorno = random.randrange(1,100)
 
 okno = tk.Tk()
 okno.title("SClicker")
@@ -12,6 +17,7 @@ dodawane_klik = 1
 
 iloscklikniec_label = tk.Label(okno, text=ilosc_klikniec)
 iloscklikniec_label.pack()
+
 
 
 def ending(ktory):
@@ -36,33 +42,47 @@ def ending(ktory):
         iloscklikniec_label.pack_forget()
         ending_1poziomserio = tk.Label(okno,text="ENDING \n 1 poziom SERIO? \n przeszedłeś całą GRE! \n gratulacje czy coś \n Dzięki za gre :) \n oceń na githubie pls", font="Arial" "Bold", )
         ending_1poziomserio.pack()
+    if ktory == "twoj los :)":
+        kliknij.pack_forget()
+        ulepszbutton.pack_forget()
+        iloscklikniec_label.pack_forget()
+        ending_twojlos = tk.Label(okno,text="ENDING \n twój los zadecydował \n by zakończyć rozgrywke :) \n przeszedłeś całą GRE! \n gratulacje czy coś \n Dzięki za gre :) \n oceń na githubie pls", font="Arial" "Bold", )
+        ending_twojlos.pack()
+    
+
     
 
 
 
 
 def dodajklikniecie():
-    global ilosc_klikniec
-    if ilosc_klikniec >= 99999:
-        ending("za duzo")
 
-    if poziom == 6:
-        if ilosc_klikniec >= 0:
-            ending("WOW")
-        else:
+    global ilosc_klikniec,yesorno
+    yesorno = random.randrange(1,100)
+    if yesorno == 99:
+        ending("twoj los :)")
+    else:
+    
+        if ilosc_klikniec >= 99999:
+            ending("za duzo")
+
+        if poziom == 6:
+            if ilosc_klikniec >= 0:
+                ending("WOW")
+            else:
+                ilosc_klikniec += dodawane_klik
+                iloscklikniec_label.config(text=ilosc_klikniec)
+        if poziom == 0:
+            if ilosc_klikniec >= 150:
+                ending("1 poziom serio")
+            else:
+                ilosc_klikniec += dodawane_klik
+                iloscklikniec_label.config(text=ilosc_klikniec)
+
+        else:    
+
             ilosc_klikniec += dodawane_klik
             iloscklikniec_label.config(text=ilosc_klikniec)
-    if poziom == 0:
-        if ilosc_klikniec >= 150:
-            ending("1 poziom serio")
-        else:
-            ilosc_klikniec += dodawane_klik
-            iloscklikniec_label.config(text=ilosc_klikniec)
-
-    else:    
-
-        ilosc_klikniec += dodawane_klik
-        iloscklikniec_label.config(text=ilosc_klikniec)
 
 def ref():
     iloscklikniec_label.config(text=ilosc_klikniec)
@@ -105,7 +125,7 @@ def reklama():
 
 
 def ulepsz():
-    global sprawdz_ending
+ 
     global kliknij
     global ulepszbutton
     global ilosc_klikniec
